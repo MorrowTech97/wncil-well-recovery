@@ -17,15 +17,17 @@
   <h1>WNCIL Well Recovery</h1>
 
   <div class="card">
-    <form id="calc">
-      <input id="static"   type="number" step="any" placeholder="Static head (m)" required />
-      <input id="drawdown" type="number" step="any" placeholder="Drawdown (m)" required />
-      <input id="pump"     type="number" step="any" placeholder="Pump rate (m³/s)" required />
-      <input id="t"        type="number" step="any" placeholder="Time (s)" required />
-      <button>Compute</button>
-    </form>
-    <pre id="out">Enter values and press Compute.</pre>
-  </div>
+  <form id="calc">
+    <input id="depthAfter"   type="number" step="any" placeholder="D — Measured depth after pumping (ft below ref)" required />
+    <input id="staticDepth"  type="number" step="any" placeholder="S — Static depth before pumping (ft below ref)" required />
+    <input id="pumpRate"     type="number" step="any" placeholder="Q — Pump rate (gpm)" required />
+    <input id="pumpDuration" type="number" step="any" placeholder="T — Pump duration (min)" required />
+    <input id="wellDiameter" type="number" step="any" placeholder="C — Well diameter (inches)" required />
+    <button>Compute</button>
+  </form>
+  <pre id="out">Enter values and press Compute.</pre>
+</div>
+
 
   <!-- This file will be created by the build step on GitHub -->
   <script src="wasm/well_recovery.js"></script>
