@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <title>WNCIL Well Recovery</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+    form { display: grid; gap: .75rem; margin: 1rem 0; }
+    input { padding: .6rem .7rem; font-size: 1rem; }
+    button { padding: .7rem 1rem; font-size: 1rem; cursor: pointer; }
+    .card { padding: 1rem; border: 1px solid #ddd; border-radius: 12px; }
+  </style>
+</head>
+<body>
+  <h1>WNCIL Well Recovery</h1>
+
+  <div class="card">
+    <form id="calc">
+      <input id="static"   type="number" step="any" placeholder="Static head (m)" required />
+      <input id="drawdown" type="number" step="any" placeholder="Drawdown (m)" required />
+      <input id="pump"     type="number" step="any" placeholder="Pump rate (m³/s)" required />
+      <input id="t"        type="number" step="any" placeholder="Time (s)" required />
+      <button>Compute</button>
+    </form>
+    <pre id="out">Enter values and press Compute.</pre>
+  </div>
+
+  <!-- This file will be created by the build step on GitHub -->
+  <script src="wasm/well_recovery.js"></script>
+  <!-- Your UI code -->
+  <script src="js/app.js" type="module"></script>
+</body>
+</html>

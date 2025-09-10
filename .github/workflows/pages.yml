@@ -1,0 +1,47 @@
+name: Build & Deploy PWA
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Emscripten SDK
+        uses: mymindstorm/setup-emsdk@v14
+
+      - name: Build C -> WASM
+        run: |
+          emcc wasm/well_recovery.c -O3 \
+            -s MODULARIZE \
+            -s EXPORT_NAME=createWellModule \
+            -s ENVIRONMENT=web \
+            -s EXPORTED_FUNCTIONS='["_well_recovery_rate"]' \
+            -s EXPORTED_RUNTIME_METHODS='["cwrap"]' \
+            -o wasm/well_recovery.js
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
